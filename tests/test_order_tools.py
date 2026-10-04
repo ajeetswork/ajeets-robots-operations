@@ -17,6 +17,9 @@ class OrderToolsTests(unittest.TestCase):
     def test_shipping_label_ascii_name(self):
         self.assertEqual(shipping_label("John Smith", "AR-42"), "John Smith | AR-42")
 
+    def test_shipping_label_keeps_order_id(self):
+        self.assertTrue(shipping_label("John Smith", "AR-99").endswith("AR-99"))
+
     def test_retry_delay_is_capped(self):
         self.assertEqual(retry_delay(10), 60)
 
