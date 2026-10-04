@@ -12,8 +12,7 @@ def parse_tags(raw: str) -> list[str]:
     return [part.strip().lower() for part in raw.split(",") if part.strip()]
 
 def shipping_label(customer_name: str, order_id: str) -> str:
-    safe_name = customer_name.encode("ascii", "ignore").decode("ascii")
-    return f"{safe_name} | {order_id}"
+    return f"{customer_name} | {order_id}"
 
 def retry_delay(attempt: int) -> int:
     return min(60, 2 ** attempt)
