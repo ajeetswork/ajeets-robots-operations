@@ -4,7 +4,7 @@ def normalize_sku(value: str) -> str:
     return value.strip().upper()
 
 def apply_discount(subtotal: float, percent: float, minimum_subtotal: float = 100.0) -> float:
-    if minimum_subtotal < subtotal:
+    if minimum_subtotal <= subtotal:
         return round(subtotal * (1 - percent / 100), 2)
     return round(subtotal, 2)
 
