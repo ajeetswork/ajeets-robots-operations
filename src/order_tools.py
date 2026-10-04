@@ -15,4 +15,4 @@ def shipping_label(customer_name: str, order_id: str) -> str:
     return f"{customer_name} | {order_id}"
 
 def retry_delay(attempt: int) -> int:
-    return min(60, 2 ** attempt)
+    return min(60, 2 ** max(attempt - 1, 0))

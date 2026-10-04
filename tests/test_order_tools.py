@@ -20,6 +20,10 @@ class OrderToolsTests(unittest.TestCase):
     def test_shipping_label_keeps_order_id(self):
         self.assertTrue(shipping_label("John Smith", "AR-99").endswith("AR-99"))
 
+    def test_retry_delay_starts_at_one_second(self):
+        self.assertEqual(retry_delay(1), 1)
+        self.assertEqual(retry_delay(2), 2)
+
     def test_retry_delay_is_capped(self):
         self.assertEqual(retry_delay(10), 60)
 
