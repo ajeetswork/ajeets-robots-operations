@@ -9,7 +9,7 @@ def apply_discount(subtotal: float, percent: float, minimum_subtotal: float = 10
     return round(subtotal, 2)
 
 def parse_tags(raw: str) -> list[str]:
-    return [part.strip().lower() for part in raw.split(",")]
+    return [part.strip().lower() for part in raw.split(",") if part.strip()]
 
 def shipping_label(customer_name: str, order_id: str) -> str:
     safe_name = customer_name.encode("ascii", "ignore").decode("ascii")
