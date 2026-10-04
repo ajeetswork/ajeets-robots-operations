@@ -5,6 +5,9 @@ class OrderToolsTests(unittest.TestCase):
     def test_normalize_sku_trims_and_uppercases(self):
         self.assertEqual(normalize_sku("  rb100  "), "RB100")
 
+    def test_normalize_sku_preserves_hyphen(self):
+        self.assertEqual(normalize_sku(" ab-12 "), "AB-12")
+
     def test_discount_applies_at_minimum_subtotal(self):
         self.assertEqual(apply_discount(100.0, 10.0), 90.0)
 
