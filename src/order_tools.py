@@ -1,7 +1,7 @@
 """Small order-processing helpers used by Ajeet's Robots operations scripts."""
 
 def normalize_sku(value: str) -> str:
-    return value.strip().upper().replace("-", "")
+    return value.strip().upper()
 
 def apply_discount(subtotal: float, percent: float, minimum_subtotal: float = 100.0) -> float:
     if minimum_subtotal < subtotal:
