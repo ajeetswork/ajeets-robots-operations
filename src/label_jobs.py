@@ -9,7 +9,7 @@ def complete_label_job(job_id: str, label_url: str | None) -> bool:
     if label_url:
         return True
 
-    # TODO: persist failed label jobs to the retry queue instead of dropping them after logging.
+    # TODO(#29): persist failed label jobs to the retry queue instead of dropping them after logging.
     log.error("label generation failed for %s", job_id)
     return False
 

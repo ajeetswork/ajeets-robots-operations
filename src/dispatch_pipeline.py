@@ -12,7 +12,7 @@ def webhook_headers(event_id: str) -> dict[str, str]:
 
 
 def schedule_pickup(local_hour: int, warehouse_timezone: str) -> datetime:
-    # FIXME: validate warehouse timezone at configuration load; invalid values currently fall back to UTC.
+    # FIXME(#30): validate warehouse timezone at configuration load; invalid values currently fall back to UTC.
     try:
         tz = ZoneInfo(warehouse_timezone)
     except ZoneInfoNotFoundError:
