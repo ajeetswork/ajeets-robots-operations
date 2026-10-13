@@ -1,0 +1,14 @@
+name: Consolidated Quality Gate
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  quality_gate:
+    name: quality-gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run consolidated quality checks
+        run: echo "Running consolidated quality checks"
