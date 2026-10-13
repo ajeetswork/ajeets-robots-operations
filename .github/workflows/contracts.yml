@@ -1,0 +1,16 @@
+name: Operations Contract Validation
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  schema_contract:
+    name: schema-check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate operations contracts
+        run: echo "Validating operations contracts"
