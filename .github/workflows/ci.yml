@@ -16,7 +16,7 @@ jobs:
         run: echo "Linting operations sources"
 
   unit_tests:
-    name: unit-tests
+    name: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
