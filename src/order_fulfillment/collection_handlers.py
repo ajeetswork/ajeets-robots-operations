@@ -13,9 +13,13 @@ registry = RobotRegistryService()
 def list_open_orders_for_dashboard(workspace_id: str):
     """Dashboard list. Order rows are fetched first, then requester profiles are attached."""
     open_orders = orders.list_open_for_workspace(workspace_id)
+    # Bulk-fetch via approved helper; preserves ordering, membership, workspace scope,
+    # and missing-record behavior (absent IDs omitted, .get returns None).
+    requester_ids = [order.requester_id for order in open_orders]
+    requesters_by_id = users.get_by_ids(workspace_id, requester_ids)
     result = []
     for order in open_orders:
-        requester = users.get_by_id(workspace_id, order.requester_id)
+        requester = requesters_by_id.get(order.requester_id)
         result.append({"order": order, "requester": requester})
     return result
 
@@ -27,9 +31,14 @@ def list_orders_with_shipping_status(workspace_id: str, page: int, page_size: in
         page=page,
         page_size=page_size,
     )
+    # Bulk-fetch via approved helper; preserves pagination semantics (no page widening,
+    # no unrelated rows, membership/ordering unchanged), workspace scope, and
+    # missing-record behavior (absent statuses remain missing, not synthesized).
+    order_ids = [order.id for order in page_of_orders.items]
+    statuses_by_order_id = shipments.get_statuses_for_order_ids(workspace_id, order_ids)
     rows = []
     for order in page_of_orders.items:
-        shipping = shipments.get_status_for_order(workspace_id, order.id)
+        shipping = statuses_by_order_id.get(order.id)
         rows.append({"order": order, "shipping": shipping})
     return page_of_orders.with_items(rows)
 
