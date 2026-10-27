@@ -7,7 +7,7 @@ export async function buildPreview(id: string, gateway: Gateway, ledger: Ledger,
     cancelled(signal);
     const previews = images.map(image => image.toLowerCase());
     cancelled(signal);
-    await gateway.save(id, previews, {});
+    await gateway.save(id, previews, {signal});
     cancelled(signal);
     await ledger.complete(id);
   } catch(e) {

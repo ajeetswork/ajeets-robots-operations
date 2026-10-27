@@ -6,7 +6,7 @@ export async function importProducts(id: string, gateway: Gateway, ledger: Ledge
     const rows = await gateway.fetch(id, {signal});
     // A validation step is synchronous; storage follows successful validation.
     if (rows.some(row => !row.trim())) throw new Error("Empty SKU");
-    await gateway.save(id, rows, {});
+    await gateway.save(id, rows, {signal});
     await ledger.complete(id);
   } catch(e) {
     if (!isAbort(e)) await ledger.fail(id, String(e));
